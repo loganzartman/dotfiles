@@ -1,4 +1,7 @@
 *
 !.gitignore
 !.vimrc
+!.zgen
+!.zshrc
+!.p10k.zsh
 
