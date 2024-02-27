@@ -23,6 +23,35 @@ vid2gif() {
     -loop 0 $2
 }
 
+# git config
+git config --global push.autoSetupRemote true
+git config --global merge.conflictstyle diff3
+
+# git aliases; not much, but they're mine
+git_default_branch() {
+  git config --get init.defaultBranch
+}
+
+git_current_remote() {
+  git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed 's/\/.*//'
+}
+
+gpro() {
+  git pull --rebase $(git_current_remote) $1
+}
+
+gfo() {
+  git fetch $(git_current_remote) $1:$1
+}
+
+gco() {
+  git checkout $1
+}
+
+gcot() {
+  git checkout --track $1
+}
+
 source ${HOME}/.zshrc-local || true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
