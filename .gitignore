@@ -4,4 +4,5 @@
 !.zgen
 !.zshrc
 !.p10k.zsh
-
+!.scripts/
+!.scripts/**/*
