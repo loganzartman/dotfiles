@@ -52,7 +52,9 @@ gcot() {
   git checkout --track $1
 }
 
-source ${HOME}/.zshrc-local || true
+if [[ -r "${HOME}/.zshrc-local" ]]; then
+  source ${HOME}/.zshrc-local
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
