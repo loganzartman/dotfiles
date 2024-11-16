@@ -16,6 +16,18 @@ if ! zgen saved; then
   zgen save
 fi
 
+case "$(uname -s)" in
+  Darwin)
+    # macOS
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    ;;
+  Linux)
+    # Linux
+    export PATH="$PATH:/usr/bin/code:$HOME/.local/bin/code"
+    ;;
+esac
+
 # ffmpeg
 vid2gif() {
   ffmpeg -i $1 \
