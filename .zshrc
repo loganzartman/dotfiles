@@ -16,6 +16,7 @@ if ! zgen saved; then
   zgen save
 fi
 
+# platform-specific setup
 case "$(uname -s)" in
   Darwin)
     # macOS
@@ -27,6 +28,15 @@ case "$(uname -s)" in
     export PATH="$PATH:/usr/bin/code:$HOME/.local/bin/code"
     ;;
 esac
+
+# autoinstall nvm
+export NVM_DIR="$HOME/.nvm"
+if [ ! -d "$NVM_DIR" ]; then
+  curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_TARGET_VER}/install.sh" | bash
+fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ffmpeg
 vid2gif() {
@@ -70,3 +80,4 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
