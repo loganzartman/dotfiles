@@ -38,6 +38,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# vim bindings
+bindkey -v
+
 # ffmpeg
 vid2gif() {
   ffmpeg -i $1 \
@@ -59,11 +62,11 @@ git_current_remote() {
 }
 
 gpro() {
-  git pull --rebase $(git_current_remote) $1
+  git pull --rebase "$(git_current_remote)" $1
 }
 
 gfo() {
-  git fetch $(git_current_remote) $1:$1
+  git fetch "$(git_current_remote)" "$1:$1"
 }
 
 gco() {
@@ -72,6 +75,14 @@ gco() {
 
 gcot() {
   git checkout --track $1
+}
+
+gdel() {
+  git rebase --rebase-merges --onto $1^ $1
+}
+
+killport() {
+  kill -9 $(lsof -t -i:$1)
 }
 
 if [[ -r "${HOME}/.zshrc-local" ]]; then
