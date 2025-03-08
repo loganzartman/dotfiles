@@ -10,11 +10,15 @@ source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved; then
   # specify plugins here
   zgen oh-my-zsh
+  
+  zgen oh-my-zsh plugins/history-substring-search
+
   zgen load romkatv/powerlevel10k powerlevel10k
 
   # generate the init script from plugins above
   zgen save
 fi
+
 
 # platform-specific setup
 case "$(uname -s)" in
@@ -26,6 +30,7 @@ case "$(uname -s)" in
   Linux)
     # Linux
     export PATH="$PATH:/usr/bin/code:$HOME/.local/bin/code"
+    export PATH="$HOME/.local/bin:$PATH"
     ;;
 esac
 
