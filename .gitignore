@@ -6,3 +6,5 @@
 !.p10k.zsh
 !.scripts/
 !.scripts/**/*
+
+*storybook.log

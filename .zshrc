@@ -75,16 +75,15 @@ gfo() {
   git fetch "$(git_current_remote)" "$1:$1"
 }
 
-gco() {
-  git checkout $1
-}
-
-gcot() {
-  git checkout --track $1
-}
-
-gdel() {
+git_delete() {
   git rebase --rebase-merges --onto $1^ $1
+}
+
+git_checkout_chunks() {
+  git checkout "$1" -- ${@:2}
+  git reset ${@:2}
+  git add -p ${@:2}
+  git restore .
 }
 
 killport() {
