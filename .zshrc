@@ -26,7 +26,9 @@ case "$(uname -s)" in
     # macOS
     export PATH="/opt/homebrew/bin:$PATH"
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    . "$HOME/.cargo/env"
+    if [[ -r "$HOME/.cargo/env" ]]; then
+      . "$HOME/.cargo/env"
+    fi
     ;;
   Linux)
     # Linux
