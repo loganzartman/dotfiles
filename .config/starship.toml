@@ -5,6 +5,8 @@ $directory\
 [](fg:#394260)\
 $git_branch\
 $git_status\
+[](fg:#394260)\
+$status\
 $character"""
 
 right_format = """
@@ -17,9 +19,13 @@ $php\
 $time\
 """
 
+[status]
+symbol = ' '
+disabled = false
+
 [character]
-success_symbol = "[](fg:#394260)[](bold green)"
-error_symbol = "[](bold red)[](bold red)"
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
 
 [directory]
 style = "fg:#e3e5e5"
@@ -36,9 +42,9 @@ format = '[[ $symbol $branch ](fg:#769ff0)]($style)'
 style = ""
 format = '[[($conflicted$stashed$untracked$staged$deleted$renamed$modified$typechanged$ahead_behind )](fg:#769ff0)]($style)'
 conflicted = '[!](bold red)'
-ahead = '[](bright-green)'
-behind = '[](bright-yellow)'
-diverged = '[](bright-purple)'
+ahead = '[](purple)'
+behind = '[](purple)'
+diverged = '[](purple)'
 up_to_date = ''
 untracked = '[](yellow)'
 stashed = '[](white)'
