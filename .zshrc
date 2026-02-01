@@ -1,24 +1,21 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+setopt autocd
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved; then
   # specify plugins here
-  zgen oh-my-zsh
-  
-  zgen oh-my-zsh plugins/history-substring-search
+  zgen load zsh-users/zsh-history-substring-search
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load tomsquest/nvm-auto-use.zsh
 
-  zgen load romkatv/powerlevel10k powerlevel10k
+  zgen clone tinted-theming/base16-shell main
 
   # generate the init script from plugins above
   zgen save
 fi
 
+source "$ZGEN_DIR/tinted-theming/base16-shell-main/profile_helper.sh" 2>/dev/null
+base16_tokyo-night-terminal-dark
 
 # platform-specific setup
 case "$(uname -s)" in
@@ -61,6 +58,8 @@ git config --global push.autoSetupRemote true
 git config --global merge.conflictstyle diff3
 
 # git aliases; not much, but they're mine
+alias g=git
+
 git_default_branch() {
   git config --get init.defaultBranch
 }
@@ -96,6 +95,11 @@ if [[ -r "${HOME}/.zshrc-local" ]]; then
   source ${HOME}/.zshrc-local
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Starship auto-install
+if ! command -v starship &>/dev/null; then
+  echo "Installing starship..."
+  mkdir -p ~/.local/bin
+  curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y
+fi
+eval "$(starship init zsh)"
 
