@@ -2,20 +2,20 @@
 
 format = """
 $directory\
-[](fg:#394260)\
+[](fg:bright-black)\
 $git_branch\
 $git_status\
-[](fg:#394260)\
+[](fg:bright-black)\
 $status\
 $character"""
 
 right_format = """
-[](fg:#212736)\
+[](fg:bright-black)\
 $nodejs\
 $rust\
 $golang\
 $php\
-[](fg:#212736)\
+[](fg:bright-black)\
 $time\
 """
 
@@ -28,7 +28,7 @@ success_symbol = "[](bold green)"
 error_symbol = "[](bold red)"
 
 [directory]
-style = "fg:#e3e5e5"
+style = "fg:bright-white"
 format = "[$path ]($style)"
 truncation_length = 3
 truncation_symbol = "/"
@@ -36,11 +36,11 @@ truncation_symbol = "/"
 [git_branch]
 symbol = ""
 style = ""
-format = '[[ $symbol $branch ](fg:#769ff0)]($style)'
+format = '[[ $symbol $branch ](fg:blue)]($style)'
 
 [git_status]
 style = ""
-format = '[[($conflicted$stashed$untracked$staged$deleted$renamed$modified$typechanged$ahead_behind )](fg:#769ff0)]($style)'
+format = '[[($conflicted$stashed$untracked$staged$deleted$renamed$modified$typechanged$ahead_behind )](fg:blue)]($style)'
 conflicted = '[!](bold red)'
 ahead = '[](purple)'
 behind = '[](purple)'
@@ -56,25 +56,25 @@ deleted = "[](green)"
 [nodejs]
 symbol = ""
 style = ""
-format = '[[ $symbol ($version) ](fg:#769ff0)]($style)'
+format = '[[ $symbol ($version) ](fg:blue)]($style)'
 
 [rust]
 symbol = ""
 style = ""
-format = '[[ $symbol ($version) ](fg:#769ff0)]($style)'
+format = '[[ $symbol ($version) ](fg:blue)]($style)'
 
 [golang]
 symbol = ""
 style = ""
-format = '[[ $symbol ($version) ](fg:#769ff0)]($style)'
+format = '[[ $symbol ($version) ](fg:blue)]($style)'
 
 [php]
 symbol = ""
 style = ""
-format = '[[ $symbol ($version) ](fg:#769ff0)]($style)'
+format = '[[ $symbol ($version) ](fg:blue)]($style)'
 
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = ""
-format = '[[ $time](fg:#a0a9cb)]($style)'
+format = '[[ $time](fg:white)]($style)'
