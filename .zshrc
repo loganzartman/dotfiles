@@ -1,4 +1,5 @@
 setopt autocd
+export PATH="$PATH:$HOME/.local/bin"
 
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
@@ -50,7 +51,6 @@ case "$(uname -s)" in
   Linux)
     # Linux
     export PATH="$PATH:/usr/bin/code:$HOME/.local/bin/code"
-    export PATH="$HOME/.local/bin:$PATH"
     ;;
 esac
 
