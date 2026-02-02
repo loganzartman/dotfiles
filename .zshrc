@@ -14,6 +14,11 @@ if ! zgen saved; then
   zgen save
 fi
 
+# zsh-history-substring-search configuration
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
 source "$ZGEN_DIR/tinted-theming/base16-shell-main/profile_helper.sh" 2>/dev/null
 base16_tokyo-night-terminal-dark
 
