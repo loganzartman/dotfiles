@@ -22,7 +22,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # setup fzf
-export PATH="$PATH:$HOME/.zgen/junegunn/fzf-master/bin"
+export PATH="$PATH:$ZGEN_DIR/junegunn/fzf-master/bin"
 if ! type "fzf" > /dev/null; then
   $HOME/.zgen/junegunn/fzf-master/install --bin
 fi
@@ -30,13 +30,14 @@ source <(fzf --zsh)
 
 # setup zoxide
 if ! type "zoxide" > /dev/null; then
-  $HOME/.zgen/ajeetdsouza/zoxide-main/install.sh
+  $ZGEN_DIR/ajeetdsouza/zoxide-main/install.sh
 fi
 eval "$(zoxide init zsh)"
 
 # terminal colors
 source "$ZGEN_DIR/tinted-theming/base16-shell-main/profile_helper.sh" 2>/dev/null
-base16_tokyo-night-terminal-dark
+source "$HOME/.config/theme-util.zsh"
+theme system
 
 # platform-specific setup
 case "$(uname -s)" in

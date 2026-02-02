@@ -9,6 +9,7 @@
 
 !.config
 .config/*
+!.config/theme-util.zsh
 !.config/starship.toml
 
 *storybook.log
