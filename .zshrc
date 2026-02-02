@@ -111,6 +111,10 @@ killport() {
   kill -9 $(lsof -t -i:$1)
 }
 
+lsport() {
+  lsof -i:$1
+}
+
 if [[ -r "${HOME}/.zshrc-local" ]]; then
   source ${HOME}/.zshrc-local
 fi
@@ -123,4 +127,7 @@ if ! command -v starship &>/dev/null; then
 fi
 eval "$(starship init zsh)"
 
+
+
+export HUSKY=0
 
