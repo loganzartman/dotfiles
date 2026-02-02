@@ -6,9 +6,10 @@ if ! zgen saved; then
   # specify plugins here
   zgen load zsh-users/zsh-history-substring-search
   zgen load zsh-users/zsh-syntax-highlighting
-  zgen load tomsquest/nvm-auto-use.zsh
 
   zgen clone tinted-theming/base16-shell main
+  zgen clone junegunn/fzf
+  zgen clone ajeetdsouza/zoxide main
 
   # generate the init script from plugins above
   zgen save
@@ -19,6 +20,20 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
+# setup fzf
+export PATH="$PATH:$HOME/.zgen/junegunn/fzf-master/bin"
+if ! type "fzf" > /dev/null; then
+  $HOME/.zgen/junegunn/fzf-master/install --bin
+fi
+source <(fzf --zsh)
+
+# setup zoxide
+if ! type "zoxide" > /dev/null; then
+  $HOME/.zgen/ajeetdsouza/zoxide-main/install.sh
+fi
+eval "$(zoxide init zsh)"
+
+# terminal colors
 source "$ZGEN_DIR/tinted-theming/base16-shell-main/profile_helper.sh" 2>/dev/null
 base16_tokyo-night-terminal-dark
 
@@ -107,4 +122,5 @@ if ! command -v starship &>/dev/null; then
   curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin -y
 fi
 eval "$(starship init zsh)"
+
 
