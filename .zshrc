@@ -7,10 +7,11 @@ if ! zgen saved; then
   # specify plugins here
   zgen load zsh-users/zsh-history-substring-search
   zgen load zsh-users/zsh-syntax-highlighting
+  zgen load trystan2k/zsh-tab-title
+  zgen load tinted-theming/base16-shell
 
-  zgen clone tinted-theming/base16-shell main
   zgen clone junegunn/fzf
-  zgen clone ajeetdsouza/zoxide main
+  zgen clone ajeetdsouza/zoxide
 
   # generate the init script from plugins above
   zgen save
@@ -48,10 +49,12 @@ case "$(uname -s)" in
     if [[ -r "$HOME/.cargo/env" ]]; then
       . "$HOME/.cargo/env"
     fi
+    eval "$(ssh-agent -s)" > /dev/null 2>&1
     ;;
   Linux)
     # Linux
     export PATH="$PATH:/usr/bin/code:$HOME/.local/bin/code"
+    eval "$(ssh-agent -s)" > /dev/null 2>&1
     ;;
 esac
 
@@ -97,6 +100,14 @@ gfo() {
   git fetch "$(git_current_remote)" "$1:$1"
 }
 
+grm() {
+  git rebase "$@" "$(git merge-base HEAD main)"
+}
+
+gpf() {
+  git push --force-with-lease
+}
+
 git_delete() {
   git rebase --rebase-merges --onto $1^ $1
 }
@@ -116,6 +127,12 @@ lsport() {
   lsof -i:$1
 }
 
+relock() {
+  git fetch origin main:main
+  git checkout main -- $(git rev-parse --show-toplevel)/pnpm-lock.yaml
+  pnpm -w install
+}
+
 if [[ -r "${HOME}/.zshrc-local" ]]; then
   source ${HOME}/.zshrc-local
 fi
@@ -129,6 +146,12 @@ fi
 eval "$(starship init zsh)"
 
 
-
 export HUSKY=0
 
+# pnpm
+export PNPM_HOME="/Users/logan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
